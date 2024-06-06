@@ -43,32 +43,31 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", async(req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
+  const email = req.body.email;
+  const password = req.body.password;
 
-    console.log(email);
-    console.log(password);
-  
-    try {
-      const result = await db.query("SELECT * FROM users WHERE email = $1", [
-        email,
-      ]);
+  console.log(email);
+  console.log(password);
+
+  try {
+      const result = await db.query("SELECT * FROM users WHERE email = $1", [email]);
       if (result.rows.length > 0) {
-        const user = result.rows[0];
-        const storedPassword = user.password;
-  
-        if (password === storedPassword) {
-          res.render("single.ejs");
-        } else {
-          res.send("Incorrect Password");
-        }
+          const user = result.rows[0]; // Changed from result.rows[1] to result.rows[0]
+          const storedPassword = user.password;
+
+          if (password === storedPassword) {
+              res.render("dashboard.ejs");
+          } else {
+              res.send("Incorrect Password");
+          }
       } else {
-        res.send("User not found");
+          res.send("User not found");
       }
-    } catch (err) {
+  } catch (err) {
       console.log(err);
-    }
-  });
+      res.status(500).send("Server error");
+  }
+});
 
 app.get("/signup", (req, res) => {
     res.render("signup.ejs");
@@ -91,7 +90,7 @@ app.post("/signup",async(req,res) =>{
           [email, password]
         );
         console.log(result);
-        res.render("secrets.ejs");
+        res.render("single.ejs");
       }
     } catch (err) {
       console.log(err);
@@ -105,11 +104,17 @@ app.get("/single", (req, res) => {
 app.get("/team", (req, res) => {
     res.render("team.ejs");
 });
+app.get("/quiz", (req, res) => {
+  res.render("quiz.ejs");
+});
 
 app.get("/testimonial", (req, res) => {
     res.render("testimonial.ejs");
 });
 
+app.get("/dashboard", (req, res) => {
+    res.render("dashboard.ejs");
+});
 //listen - server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

@@ -32,6 +32,8 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link href="img/Sharda_Logo.png" rel="icon">
+
 
 </head>
 
@@ -109,27 +111,27 @@
             <div class="row g-4 wow fadeInUp" data-wow-delay="0.5s ">
 
                 <center>
-                    <form class="shadow p-4" style="max-width: 550px;">
+                    <form action="/signup" method="POST" class="shadow p-4" style="max-width: 550px;">
                         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                             <h1 class="mb-5 bg-white text-center px-3">Signup</h1>
 
                         </div>
                         <div class="row g-3">
                             <div class="col-12">
-                                <div class="form-floating">
+                                <!-- <div class="form-floating">
                                     <input type="text" class="form-control" id="username" placeholder="Username">
                                     <label for="Username">Username</label>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Email Address">
+                                    <input type="email" class="form-control" id="email" placeholder="Email Address" name="username">
                                     <label for="email">Email Address</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="password" class="form-control" id="password" placeholder="Password">
+                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                                     <label for="password">Password</label>
                                 </div>
                             </div>
